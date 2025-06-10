@@ -118,7 +118,7 @@ This guide walks you through creating a Resource Group, Virtual Network, Domain 
 
    ## Step 5: Log into the VM and Disable the Windows Firewall (For Testing)
    
-- Use Remote Desktop (RDP) to connect to `DC-1` using:
+- Use Remote Desktop (RDP) to connect your Domain Controller (e.g. `CapsuleCorpDC`)  using:
    - Username: `CapsuleCorpAdmin`
    - Password: `TimeTravel92`
 - Once logged in, right click the **Start Menu**
@@ -135,7 +135,7 @@ This guide walks through the process of creating a Windows 10 client virtual mac
 
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/V28q4N1.png" height="80%" width="80%" alt="Azure VM Creation Screen"/>
 </p>
 <p>
 
@@ -144,34 +144,35 @@ This guide walks through the process of creating a Windows 10 client virtual mac
 - In the [Azure Portal](https://portal.azure.com), go to **Virtual Machines**.
 - Click **+ Create** > **Azure virtual machine**.
 - Select the same **Resource Group** and **Region** as the Domain Controller.
-- Enter the VM name: `Client-1`.
+- Enter the VM name: `CapsuleCorpLab`.
 - For **Image**, select **Windows 10 Pro, version 22H2** or the latest available.
-- Set **Username** to `labuser` and **Password** to `Cyberlab123!`.
+- Set **Username** to `Bulma` and **Password** to `Dragonball84`.
 - Under the **Networking** tab:
-   - Choose the same **Virtual Network** and **Subnet** as `DC-1` (e.g., `LabVNet` and `LabSubnet`).
+   - Choose the same **Virtual Network** and **Subnet** as the Domain Controller.
 - Click **Review + create**, then **Create**.
    
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/HLPNQWC.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 
    ## Step 2: Set Client VM’s DNS Settings to the Domain Controller’s Private IP Address
 
-- Once deployed, go to **Virtual Machines** and select `Client-1`.
-- In the **Networking** section, click the **Network Interface** name.
+- Once deployed, go to **Virtual Machines** and select `CapsuleCorpLab`.
+- In the left menu, click **Networking** followed by **Network Settings**
+   - Click the **Network Interface** name.
 - Click **DNS Servers** under **Settings**.
-- Choose **Custom** and input the **Private IP Address** of `DC-1` (e.g., `10.0.1.4`).
+- Choose **Custom** and input the **Private IP Address** of the Domain Controller (`CapsuleCorpDC`) **10.0.1.4**.
 - Click **Save**.
    
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/wcf3JoG.png" height="80%" width="80%" alt="VM Overview Page"/>
 </p>
 <p>
 
@@ -184,22 +185,22 @@ This guide walks through the process of creating a Windows 10 client virtual mac
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/2mQENiQ.png" height="80%" width="80%" alt="RDP Prompt"/>
 </p>
 <p>
 
    ## Step 4: Log into Client VM
 
-- Use **Remote Desktop (RDP)** to connect to `Client-1`.
+- Use **Remote Desktop (RDP)** to connect to `CapsuleCorpLab`.
    - Use the credentials:
-     - Username: `labuser`
-     - Password: `Cyberlab123!`
+     - Username: `Bulma`
+     - Password: `Dragonball84`
 
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/mSRP4D2.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 
@@ -213,7 +214,7 @@ This guide walks through the process of creating a Windows 10 client virtual mac
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/Vl2HH2c.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 
