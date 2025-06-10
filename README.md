@@ -58,7 +58,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 5. Choose the same region as your Resource Group.
 6. Set the **Address space** (e.g., `10.0.0.0/16`).
 7. Under **Subnets**, add a subnet:
-   - Name: `CCSubnet`
+   - Name: `CapsuleCSubnet`
    - Subnet address range: `10.0.1.0/24`
 8. Click **Review + create** then **Create**.
 </p>
