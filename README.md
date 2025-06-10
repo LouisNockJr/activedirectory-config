@@ -222,8 +222,8 @@ This guide walks through the process of creating a Windows 10 client virtual mac
 
 - On the Client VM, **open Powershell**.
    - Type the following command: *ipconfig /all*
-- In the output, under the network adapter, look for the **DNS Servers** line.
-- It should display the Private IP Address of the Domain Controller.
+- In the output, under the network adapter, look for the **DNS Servers** line
+- It should display the Private IP Address of the Domain Controller (10.0.1.4)
 
 </p>
 <br />
