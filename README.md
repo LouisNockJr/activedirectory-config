@@ -91,28 +91,40 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/E2JUo0c.png" height="80%" width="80%" alt="Azure Portal NIC IP Configuration Page"/>
 </p>
 <p>
 
    Step 4: Set the Domain Controller’s NIC Private IP Address to Static
 
-1. After the VM is deployed, go to **Virtual machines** and select `DC-1`.
-2. In the left menu, click **Networking**.
-3. Under **Network Interface**, click on the NIC name.
-4. Select **IP configurations**.
-5. Click on the IP configuration (usually named `ipconfig1`).
-6. Change **Private IP address assignment** from **Dynamic** to **Static**.
-7. Note or set the desired static private IP address (e.g., `10.0.1.4`).
-8. Click **Save**.
+- After the VM is deployed, go to **Virtual machines** and select `CapsuleCorpDC`.
+- In the left menu, click **Networking** followed by **Network Settings**.
+- Under **Network Interface**, click on the NIC name.
+- Select **IP configurations**.
+- Click on the IP configuration (usually named `ipconfig1`).
+- Change **Private IP address assignment** from **Dynamic** to **Static**.
+- Note or set the desired static private IP address (e.g., `10.0.1.4`).
+- Click **Save**.
+    
 </p>
 <br />
 
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/OVa40hN.png" height="80%" width="80%" alt="Windows Firewall Turned Off"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+Step 5: Log into the VM and Disable the Windows Firewall (For Testing)
+   
+- Use Remote Desktop (RDP) to connect to `DC-1` using:
+   - Username: `CapsuleCorpAdmin`
+   - Password: `TimeTravel92`
+- Once logged in, right click the **Start Menu**
+- Run **wf.msc** (Windows Firewall)
+- Click **Windows Defender Firewall Properties**
+   - Change Firewall State to **Off**
+   - Click **Apply**, then **OK** 
+
 </p>
 <br />
 
