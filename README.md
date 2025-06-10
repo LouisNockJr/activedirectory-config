@@ -29,13 +29,15 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 <h1>Deployment and Configuration Steps</h1>
 
 <h2>Domain Controller Setup in Azure</h2>
+This guide walks you through creating a Resource Group, Virtual Network, Domain Controller VM, setting a static IP, and disabling the Windows Firewall for testing connectivity.</ br>
+
 
 <p>
 <img src="https://i.imgur.com/wmtjjzc.png" height="80%" width="80%" alt="Azure Portal Resourse Groups Page"/>
 </p>
 <p>
 
-   Step 1: Create a Resource Group
+   ## Step 1: Create a Resource Group
 
 - Log in to the [Azure Portal](https://portal.azure.com).
 - In the left-hand menu, select **Resource groups**.
@@ -51,7 +53,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 </p>
 <p>
 
-   Step 2: Create a Virtual Network and Subnet
+   ## Step 2: Create a Virtual Network and Subnet
 
 - In the Azure Portal, go to **Virtual networks**.
 - Click **+ Create**.
@@ -72,7 +74,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 </p>
 <p>
 
-   Step 3: Create the Domain Controller VM (Windows Server 2022)
+   ## Step 3: Create the Domain Controller VM (Windows Server 2022)
 
 - Navigate to **Virtual machines** in Azure Portal.
 - Click **+ Create** > **Azure virtual machine**.
@@ -95,7 +97,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 </p>
 <p>
 
-   Step 4: Set the Domain Controller’s NIC Private IP Address to Static
+   ## Step 4: Set the Domain Controller’s NIC Private IP Address to Static
 
 - After the VM is deployed, go to **Virtual machines** and select `CapsuleCorpDC`.
 - In the left menu, click **Networking** followed by **Network Settings**.
@@ -114,7 +116,7 @@ This tutorial outlines the implementation of Active Directory within Azure Virtu
 </p>
 <p>
 
-Step 5: Log into the VM and Disable the Windows Firewall (For Testing)
+   ## Step 5: Log into the VM and Disable the Windows Firewall (For Testing)
    
 - Use Remote Desktop (RDP) to connect to `DC-1` using:
    - Username: `CapsuleCorpAdmin`
@@ -128,13 +130,27 @@ Step 5: Log into the VM and Disable the Windows Firewall (For Testing)
 </p>
 <br />
 
+<h2>Client Setup in Azure</h2>
+This guide walks through the process of creating a Windows 10 client virtual machine, configuring its DNS settings to point to a Domain Controller (DC-1), and validating network connectivity.</ br>
 
 
 <p>
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+   ## Step 1: Create the Client VM (Windows 10)
+
+- In the [Azure Portal](https://portal.azure.com), go to **Virtual Machines**.
+- Click **+ Create** > **Azure virtual machine**.
+- Select the same **Resource Group** and **Region** as the Domain Controller.
+- Enter the VM name: `Client-1`.
+- For **Image**, select **Windows 10 Pro, version 22H2** or the latest available.
+- Set **Username** to `labuser` and **Password** to `Cyberlab123!`.
+- Under the **Networking** tab:
+   - Choose the same **Virtual Network** and **Subnet** as `DC-1` (e.g., `LabVNet` and `LabSubnet`).
+- Click **Review + create**, then **Create**.
+   
 </p>
 <br />
 
@@ -142,7 +158,15 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+   ## Step 2: Set Client VM’s DNS Settings to the Domain Controller’s Private IP Address
+
+- Once deployed, go to **Virtual Machines** and select `Client-1`.
+- In the **Networking** section, click the **Network Interface** name.
+- Click **DNS Servers** under **Settings**.
+- Choose **Custom** and input the **Private IP Address** of `DC-1` (e.g., `10.0.1.4`).
+- Click **Save**.
+   
 </p>
 <br />
 
@@ -150,7 +174,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+   ## Step 3: Restart the Client VM
+
+- From the Client VM overview page in the Azure Portal, click **Restart**.
+- Wait until the VM finishes restarting and shows as **Running**.
+   
 </p>
 <br />
 
@@ -158,7 +187,14 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+   ## Step 4: Log into Client VM
+
+- Use **Remote Desktop (RDP)** to connect to `Client-1`.
+   - Use the credentials:
+     - Username: `labuser`
+     - Password: `Cyberlab123!`
+
 </p>
 <br />
 
@@ -166,6 +202,27 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+   ## Step 5: Ping the Domain Controller's Private IP Address
+
+- Open **Command Prompt** or **PowerShell** on the Client VM.
+   - Type the following command: *ping 10.0.1.4*
+- Confirm that the ping returns successful replies
+   
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+
+   ## Step 6: Check DNS Settings via ipconfig /all
+
+- On the Client VM, **open Powershell**.
+   - Type the following command: *ipconfig /all*
+- In the output, under the network adapter, look for the **DNS Servers** line.
+- It should display the Private IP Address of the Domain Controller.
+
 </p>
 <br />
